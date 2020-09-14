@@ -19,7 +19,7 @@ app.use(
   //csp policy set up
   csp({
     directives: {
-      defaultSrc: ["*", "http://localhost:4000"],
+      defaultSrc: ["*", "https://fakecarstock.herokuapp.com/"],
       scriptSrc: ["*", "'self'", "'unsafe-inline'", "'unsafe-eval'"],
       styleSrc: ["*"],
       imgSrc: ["*", "'self'", "data: http:"],

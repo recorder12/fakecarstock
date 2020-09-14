@@ -11,7 +11,7 @@ const app = async () => {
     document.getElementById("lists").remove();
   }
 
-  if (img1 === "http://localhost:4000/") {
+  if (img1 === "https://fakecarstock.herokuapp.com/") {
     alert("차량 이미지를 업로드해주세요");
     init();
     return;

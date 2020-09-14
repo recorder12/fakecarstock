@@ -1,0 +1,66 @@
+{
+  "name": "fakecarstock",
+  "version": "1.0.0",
+  "description": "Matching uploaded image by many images of car stocks on popular sites to prevent people from tricking",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/recorder12/scrapping_sources.git"
+  },
+  "author": "KBG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/recorder12/scrapping_sources/issues"
+  },
+  "homepage": "https://github.com/recorder12/scrapping_sources#readme",
+  "dependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/polyfill": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "autoprefixer": "^9.8.6",
+    "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "css-loader": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "fs": "0.0.1-security",
+    "helmet": "^4.0.0",
+    "helmet-csp": "^3.0.0",
+    "image-data-uri": "^2.0.1",
+    "mongoose": "^5.9.29",
+    "morgan": "^1.10.0",
+    "mz": "^2.7.0",
+    "node-fetch": "^2.6.0",
+    "node-sass": "^4.14.1",
+    "path": "^0.12.7",
+    "postcss-loader": "^3.0.0",
+    "pug": "^3.0.0",
+    "request": "^2.88.2",
+    "resemblejs": "^3.2.5",
+    "sass-loader": "^7.1.0",
+    "scss": "^0.2.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "scripts": {
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2",
+    "dev:assets": "cd src && WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
+    "copyAll": "cp -R src/static build && cp -R src/views build",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rm -rf build",
+    "start": "node build/init.js",
+    "prestart": "npm run build"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

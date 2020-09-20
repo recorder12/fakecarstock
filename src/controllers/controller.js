@@ -41,7 +41,7 @@ export const postSearchDB = async (req, res) => {
       },
       errorType: "movement",
       transparency: 0.3,
-      largeImageThreshold: 1200,
+      largeImageThreshold: 0,
       useCrossOrigin: false,
       outputDiff: true,
     },

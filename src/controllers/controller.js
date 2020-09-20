@@ -45,7 +45,7 @@ export const postSearchDB = async (req, res) => {
       useCrossOrigin: false,
       outputDiff: true,
     },
-    scaleToSameSize: true,
+    scaleToSameSize: false,
     ignore: "antialiasing",
   };
 

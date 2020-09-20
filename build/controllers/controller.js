@@ -61,20 +61,8 @@ var postSearchDB = /*#__PURE__*/function () {
             Lists = [];
             matchNm = 0;
             options = {
-              output: {
-                errorColor: {
-                  red: 255,
-                  green: 0,
-                  blue: 255
-                },
-                errorType: "movement",
-                transparency: 0.3,
-                largeImageThreshold: 1200,
-                useCrossOrigin: false,
-                outputDiff: true
-              },
-              scaleToSameSize: true,
-              ignore: "antialiasing"
+              scaleToSameSize: false,
+              ignore: ["antialiasing", "colors"]
             };
             _context2.prev = 6;
             _context2.next = 9;

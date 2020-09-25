@@ -1,4 +1,6 @@
 import axios from "axios";
+import imageDataURI from "image-data-uri";
+const compare = require("resemblejs").compare;
 const searchButton = document.getElementById("search");
 const resultContainer = document.getElementById("jsList");
 
@@ -35,9 +37,66 @@ const app = async () => {
   });
 
   const Lists = await response.data.db;
-  console.log("done!");
-  displayList(Lists);
+  console.log("DB arrived!");
+
+  const results = await matchImage(img1, Lists).then((Lists) => {
+    console.log(Lists.length);
+    console.log(Lists);
+    return Lists;
+  });
+  displayList(results);
   init();
+};
+
+////////////////////////////////////////////////////////////
+
+const matchImage = async (img1, searchedDB) => {
+  return new Promise((resolve, reject) => {
+    let errorCount = 0;
+    let cm = 0;
+    let img2;
+    let matchNm = 0;
+    let lm = 0;
+    let Lists = [];
+
+    const options = {
+      scaleToSameSize: false,
+      ignore: ["antialiasing", "colors"],
+    };
+
+    const length = searchedDB.length;
+
+    searchedDB.forEach(async (element) => {
+      lm++;
+      try {
+        img2 = await imageDataURI
+          .encodeFromURL(element.imageURL)
+          .then((res) => {
+            return res;
+          });
+
+        await compare(img1, img2, options, function (err, data) {
+          if (data.misMatchPercentage < 10) {
+            Lists.push(element);
+            matchNm++;
+          }
+
+          cm++;
+          console.log(
+            `Counting Nm / totla Count : ${cm} / ${
+              length - errorCount - 1
+            } (matching Number : ${matchNm})`
+          );
+        });
+      } catch (error) {
+        errorCount++;
+        console.log(error);
+      }
+
+      console.log("lm : ", lm);
+    });
+    resolve(Lists);
+  });
 };
 
 const makeDelay = () => {

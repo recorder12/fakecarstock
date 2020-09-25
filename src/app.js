@@ -19,7 +19,12 @@ app.use(
   //csp policy set up
   csp({
     directives: {
-      defaultSrc: ["*", "https://fakecarstock.herokuapp.com/"],
+      defaultSrc: [
+        "*",
+        "https://fakecarstock.herokuapp.com/",
+        "http://localhost:4000/",
+        "https://file2.bobaedream.co.kr/",
+      ],
       scriptSrc: ["*", "'self'", "'unsafe-inline'", "'unsafe-eval'"],
       styleSrc: ["*"],
       imgSrc: ["*", "'self'", "data: http:"],
@@ -31,7 +36,25 @@ app.use(
     reportOnly: false,
   })
 );
-app.use(cors()); //CORS request configure
+
+// var whitelist = [
+//   "https://file2.bobaedream.co.kr/",
+//   "https://fakecarstock.herokuapp.com/",
+//   "http://localhost:4000/",
+// ];
+
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+// };
+
+app.options("*", cors());
+// app.use(cors()); //CORS request configure
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));

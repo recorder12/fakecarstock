@@ -36,7 +36,7 @@ app.use((0, _helmet["default"])());
 app.use( //csp policy set up
 (0, _helmetCsp["default"])({
   directives: {
-    defaultSrc: ["*", "https://fakecarstock.herokuapp.com/"],
+    defaultSrc: ["*", "https://fakecarstock.herokuapp.com/", "http://localhost:4000/", "https://file2.bobaedream.co.kr/"],
     scriptSrc: ["*", "'self'", "'unsafe-inline'", "'unsafe-eval'"],
     styleSrc: ["*"],
     imgSrc: ["*", "'self'", "data: http:"],
@@ -46,8 +46,22 @@ app.use( //csp policy set up
     frameSrc: ["'none'"]
   },
   reportOnly: false
-}));
-app.use((0, _cors["default"])()); //CORS request configure
+})); // var whitelist = [
+//   "https://file2.bobaedream.co.kr/",
+//   "https://fakecarstock.herokuapp.com/",
+//   "http://localhost:4000/",
+// ];
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+// };
+
+app.options("*", (0, _cors["default"])()); // app.use(cors()); //CORS request configure
 
 app.set("view engine", "pug");
 app.set("views", _path["default"].join(__dirname, "views"));

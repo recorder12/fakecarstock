@@ -26,72 +26,74 @@ export const postSearchDB = async (req, res) => {
     body: { carModel, img1 },
   } = req;
 
-  let errorCount = 0;
-  let cm = 0;
-  let img2;
-  let Lists = [];
-  let matchNm = 0;
+  // let errorCount = 0;
+  // let cm = 0;
+  // let img2;
+  // let Lists = [];
+  // let matchNm = 0;
 
-  const options = {
-    scaleToSameSize: false,
-    ignore: ["antialiasing", "colors"],
-  };
+  // const options = {
+  //   scaleToSameSize: false,
+  //   ignore: ["antialiasing", "colors"],
+  // };
 
   try {
     const searchedDB = await Bobae.find({
       title: { $regex: carModel, $options: "i" },
     });
-    const length = searchedDB.length;
 
-    searchedDB.forEach(async (element) => {
-      try {
-        img2 = await imageDataURI
-          .encodeFromURL(element.imageURL) //Image URL이 잘못된 경우 그냥 지나감. db에서 그 부분을 지울 수도 있지만, 일시적은 네트워크 장애일 가능성도 있으므로 보류
-          .then((res) => {
-            //URL --> data URI로 변경
-            return res;
-          });
-      } catch (error) {
-        errorCount++;
-        console.log(error);
-        if (cm >= length - errorCount - 1) {
-          console.log("ended!");
-          res.json({ db: Lists });
-          res.end();
-        }
-        return false;
-      }
+    res.json({ db: searchedDB });
+    res.end();
+    // const length = searchedDB.length;
 
-      try {
-        await compare(img1, img2, options, function (err, data) {
-          if (err) {
-            console.log("An error!");
-          }
-          if (data.misMatchPercentage < 10) {
-            Lists.push(element);
-            matchNm++;
-          }
-          cm++;
-          if (cm === length - errorCount - 1) {
-            console.log("ended!");
-            res.json({ db: Lists });
-            res.end();
-          }
-          console.log(
-            `Counting Nm / totla Count : ${cm} / ${
-              length - errorCount - 1
-            } (matching Number : ${matchNm})`
-          );
-        });
-      } catch (error) {
-        if (cm === length - errorCount - 1) {
-          console.log("ended!");
-          res.json({ db: Lists });
-          res.end();
-        }
-        console.log(error);
-      }
-    });
+    // searchedDB.forEach(async (element) => {
+    //   try {
+    //     img2 = await imageDataURI
+    //       .encodeFromURL(element.imageURL)
+    //       .then((res) => {
+    //         return res;
+    //       });
+    //   } catch (error) {
+    //     errorCount++;
+    //     console.log(error);
+    //     if (cm >= length - errorCount - 1) {
+    //       console.log("ended!");
+    //       res.json({ db: Lists });
+    //       res.end();
+    //     }
+    //     return false;
+    //   }
+
+    //   try {
+    //     await compare(img1, img2, options, function (err, data) {
+    //       if (err) {
+    //         console.log("An error!");
+    //       }
+    //       if (data.misMatchPercentage < 10) {
+    //         Lists.push(element);
+    //         matchNm++;
+    //       }
+    //       cm++;
+    //       if (cm === length - errorCount - 1) {
+    //         console.log("ended!");
+    //         res.json({ db: Lists });
+    //         res.end();
+    //       }
+    //       console.log(
+    //         `Counting Nm / totla Count : ${cm} / ${
+    //           length - errorCount - 1
+    //         } (matching Number : ${matchNm})`
+    //       );
+    //     });
+    //   } catch (error) {
+    //     if (cm === length - errorCount - 1) {
+    //       console.log("ended!");
+    //       res.json({ db: Lists });
+    //       res.end();
+    //     }
+    //     console.log(error);
+    //   }
+    // });
   } catch (error) {
     console.log(error);
     res.redirect(routes.home);

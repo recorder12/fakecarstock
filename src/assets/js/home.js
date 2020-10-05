@@ -1,6 +1,7 @@
 import axios from "axios";
 import imageDataURI from "image-data-uri";
 const compare = require("resemblejs").compare;
+const base64Img = require("base64-img");
 const searchButton = document.getElementById("search");
 const resultContainer = document.getElementById("jsList");
 
@@ -39,23 +40,18 @@ const app = async () => {
   const Lists = await response.data.db;
   console.log("DB arrived!");
 
-  const results = await matchImage(img1, Lists).then((Lists) => {
-    console.log(Lists.length);
-    console.log(Lists);
-    return Lists;
-  });
-  displayList(results);
+  const SearchedList = await matchImage(img1, Lists);
+
+  displayList(SearchedList);
+
   init();
 };
 
-////////////////////////////////////////////////////////////
-
 const matchImage = async (img1, searchedDB) => {
   return new Promise((resolve, reject) => {
-    let errorCount = 0;
-    let cm = 0;
-    let img2;
-    let matchNm = 0;
+    // let errorCount = 0;
+    // let cm = 0;
+    // let matchNm = 0;
     let lm = 0;
     let Lists = [];
 
@@ -67,35 +63,29 @@ const matchImage = async (img1, searchedDB) => {
     const length = searchedDB.length;
 
     searchedDB.forEach(async (element) => {
-      lm++;
       try {
-        img2 = await imageDataURI
-          .encodeFromURL(element.imageURL)
-          .then((res) => {
-            return res;
-          });
-
-        await compare(img1, img2, options, function (err, data) {
+        await compare(img1, element.imageURL, options, function (err, data) {
           if (data.misMatchPercentage < 10) {
             Lists.push(element);
-            matchNm++;
+            // matchNm++;
           }
 
-          cm++;
-          console.log(
-            `Counting Nm / totla Count : ${cm} / ${
-              length - errorCount - 1
-            } (matching Number : ${matchNm})`
-          );
+          //   cm++;
+          //   console.log(
+          //     `Counting Nm / total Count : ${cm} / ${
+          //       length - errorCount
+          //     } (matching Number : ${matchNm})`
+          //   );
         });
       } catch (error) {
-        errorCount++;
         console.log(error);
+      } finally {
+        lm++;
+        if (lm === length - 1) {
+          resolve(Lists);
+        }
       }
-
-      console.log("lm : ", lm);
     });
-    resolve(Lists);
   });
 };
 

@@ -2,6 +2,8 @@ import resemble from "resemblejs";
 const compare = require("resemblejs").compare;
 const fs = require("mz/fs");
 import imageDataURI from "image-data-uri";
+// const base64Img = require("base64-img");
+const base64Img = require("base64-img-promise");
 
 import { updateCyber, updateKorea, updateIncome } from "./scrapping";
 import Bobae from "../models/Bobae";
@@ -22,83 +24,121 @@ export const admin = (req, res) => {
 
 //search API
 export const postSearchDB = async (req, res) => {
-  const {
-    body: { carModel, img1 },
-  } = req;
-
   // let errorCount = 0;
   // let cm = 0;
-  // let img2;
-  // let Lists = [];
   // let matchNm = 0;
+  // let lm = 0;
+  // let Lists = [];
 
   // const options = {
   //   scaleToSameSize: false,
   //   ignore: ["antialiasing", "colors"],
   // };
 
-  try {
-    const searchedDB = await Bobae.find({
-      title: { $regex: carModel, $options: "i" },
-    });
+  const {
+    body: { carModel, img1 },
+  } = req;
 
-    res.json({ db: searchedDB });
-    res.end();
-    // const length = searchedDB.length;
+  const searchedDB = await Bobae.find({
+    title: { $regex: carModel, $options: "i" },
+  });
 
-    // searchedDB.forEach(async (element) => {
-    //   try {
-    //     img2 = await imageDataURI
-    //       .encodeFromURL(element.imageURL)
-    //       .then((res) => {
-    //         return res;
-    //       });
-    //   } catch (error) {
-    //     errorCount++;
-    //     console.log(error);
-    //     if (cm >= length - errorCount - 1) {
-    //       console.log("ended!");
-    //       res.json({ db: Lists });
-    //       res.end();
-    //     }
-    //     return false;
-    //   }
-
-    //   try {
-    //     await compare(img1, img2, options, function (err, data) {
-    //       if (err) {
-    //         console.log("An error!");
-    //       }
-    //       if (data.misMatchPercentage < 10) {
-    //         Lists.push(element);
-    //         matchNm++;
-    //       }
-    //       cm++;
-    //       if (cm === length - errorCount - 1) {
-    //         console.log("ended!");
-    //         res.json({ db: Lists });
-    //         res.end();
-    //       }
-    //       console.log(
-    //         `Counting Nm / totla Count : ${cm} / ${
-    //           length - errorCount - 1
-    //         } (matching Number : ${matchNm})`
-    //       );
-    //     });
-    //   } catch (error) {
-    //     if (cm === length - errorCount - 1) {
-    //       console.log("ended!");
-    //       res.json({ db: Lists });
-    //       res.end();
-    //     }
-    //     console.log(error);
-    //   }
-    // });
-  } catch (error) {
-    console.log(error);
-    res.redirect(routes.home);
-  }
+  res.json({ db: searchedDB });
+  res.end();
 };
+
+//   const length = searchedDB.length;
+
+//   searchedDB.forEach(async (element) => {
+//     try {
+//       const img2 = element.imageURL;
+//       await compare(img1, img2, options, function (err, data) {
+//         if (data.misMatchPercentage < 10) {
+//           Lists.push(element);
+//           matchNm++;
+//         }
+
+//         cm++;
+//         console.log(
+//           `Counting Nm / total Count : ${cm} / ${
+//             length - errorCount - 1
+//           } (matching Number : ${matchNm})`
+//         );
+//       });
+//       if (cm === length - errorCount - 1) {
+//         res.json({ db: Lists });
+//         res.end();
+//       }
+//     } catch (error) {
+//       console.log(error);
+//       errorCount++;
+//       if (cm === length - errorCount - 1) {
+//         res.json({ db: Lists });
+//         res.end();
+//       }
+//     }
+//   });
+// };
+
+// try {
+
+//   // res.json({ db: searchedDB });
+//   // res.end();
+
+//   // const length = searchedDB.length;
+
+//   // searchedDB.forEach(async (element) => {
+//   //   try {
+//   //     img2 = await imageDataURI
+//   //       .encodeFromURL(element.imageURL)
+//   //       .then((res) => {
+//   //         return res;
+//   //       });
+//   //   } catch (error) {
+//   //     errorCount++;
+//   //     console.log(error);
+//   //     if (cm >= length - errorCount - 1) {
+//   //       console.log("ended!");
+//   //       res.json({ db: Lists });
+//   //       res.end();
+//   //     }
+//   //     return false;
+//   //   }
+
+//   //   try {
+//   //     await compare(img1, img2, options, function (err, data) {
+//   //       if (err) {
+//   //         console.log("An error!");
+//   //       }
+//   //       if (data.misMatchPercentage < 10) {
+//   //         Lists.push(element);
+//   //         matchNm++;
+//   //       }
+//   //       cm++;
+//   //       if (cm === length - errorCount - 1) {
+//   //         console.log("ended!");
+//   //         res.json({ db: Lists });
+//   //         res.end();
+//   //       }
+//   //       console.log(
+//   //         `Counting Nm / totla Count : ${cm} / ${
+//   //           length - errorCount - 1
+//   //         } (matching Number : ${matchNm})`
+//   //       );
+//   //     });
+//   //   } catch (error) {
+//   //     if (cm === length - errorCount - 1) {
+//   //       console.log("ended!");
+//   //       res.json({ db: Lists });
+//   //       res.end();
+//   //     }
+//   //     console.log(error);
+//   //   }
+//   // });
+// } catch (error) {
+//   console.log(error);
+//   res.redirect(routes.home);
+// }
 
 //update DB API
 export const postUpdateCommmand = async (req, res) => {
@@ -125,7 +165,7 @@ export const postUpdateCommmand = async (req, res) => {
 export const postUpdateDB = async (req, res) => {
   console.log("Updating...");
 
-  for (let a = 1126; a <= 1165; a += 5) {
+  for (let a = 331; a <= 1165; a += 5) {
     const db = await updateCyber(a);
     console.log(`until ${a + 4}, done!`);
 
@@ -136,11 +176,17 @@ export const postUpdateDB = async (req, res) => {
         return;
       } else {
         try {
+          const imgUri = await imageDataURI
+            .encodeFromURL(element.imageURL)
+            .then((res) => {
+              return res;
+            });
+
           const newDB = await Bobae.create({
             siteName: element.siteName,
             title: element.title,
             pageURL: element.pageURL,
-            imageURL: element.imageURL,
+            imageURL: imgUri,
             price: element.price,
           });
         } catch (error) {
@@ -200,3 +246,84 @@ export const postUpdateDB = async (req, res) => {
     });
   }
 };
+
+const matchImage = async (img1, searchedDB) => {
+  return new Promise((resolve, reject) => {
+    let errorCount = 0;
+    let cm = 0;
+    let matchNm = 0;
+    let lm = 0;
+    let Lists = [];
+
+    const options = {
+      scaleToSameSize: false,
+      ignore: ["antialiasing", "colors"],
+    };
+
+    const length = searchedDB.length;
+
+    searchedDB.forEach(async (element) => {
+      lm++;
+      try {
+        // img2 = base64Img.requestBase64(element.imageURL, function (
+        //   err,
+        //   res,
+        //   body
+        // ) {
+        //   return body;
+        // });
+
+        // const img2 = await base64Img.requestBase64then.then(function (data) {
+        //   return data;
+        // });
+
+        // console.log(img2);
+
+        // const img2 = await imageDataURI
+        //   .encodeFromURL(element.imageURL)
+        //   .then((res) => {
+        //     return res;
+        //   });
+
+        await compare(
+          img1,
+          await base64Img.requestBase64(element.imageURL, function (
+            err,
+            res,
+            body
+          ) {
+            return body;
+          }),
+          options,
+          function (err, data) {
+            if (data.misMatchPercentage < 10) {
+              Lists.push(element);
+              matchNm++;
+            }
+
+            cm++;
+            console.log(
+              `Counting Nm / totla Count : ${cm} / ${
+                length - errorCount - 1
+              } (matching Number : ${matchNm})`
+            );
+          }
+        );
+      } catch (error) {
+        errorCount++;
+        console.log(error);
+      }
+
+      console.log("lm : ", lm);
+    });
+    resolve(Lists);
+  });
+};
+
+// (img2 = base64Img.requestBase64(element.imageURL, function (
+//   err,
+//   res,
+//   body
+// ) {
+//   return body;
+// }))

@@ -27,6 +27,9 @@ var compare = require("resemblejs").compare;
 
 var fs = require("mz/fs");
 
+// const base64Img = require("base64-img");
+var base64Img = require("base64-img-promise");
+
 _dotenv["default"].config(); //Home
 
 
@@ -55,18 +58,17 @@ var postSearchDB = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _req$body = req.body, carModel = _req$body.carModel, img1 = _req$body.img1; // let errorCount = 0;
+            // let errorCount = 0;
             // let cm = 0;
-            // let img2;
-            // let Lists = [];
             // let matchNm = 0;
+            // let lm = 0;
+            // let Lists = [];
             // const options = {
             //   scaleToSameSize: false,
             //   ignore: ["antialiasing", "colors"],
             // };
-
-            _context.prev = 1;
-            _context.next = 4;
+            _req$body = req.body, carModel = _req$body.carModel, img1 = _req$body.img1;
+            _context.next = 3;
             return _Bobae["default"].find({
               title: {
                 $regex: carModel,
@@ -74,81 +76,110 @@ var postSearchDB = /*#__PURE__*/function () {
               }
             });
 
-          case 4:
+          case 3:
             searchedDB = _context.sent;
             res.json({
               db: searchedDB
             });
-            res.end(); // const length = searchedDB.length;
-            // searchedDB.forEach(async (element) => {
-            //   try {
-            //     img2 = await imageDataURI
-            //       .encodeFromURL(element.imageURL)
-            //       .then((res) => {
-            //         return res;
-            //       });
-            //   } catch (error) {
-            //     errorCount++;
-            //     console.log(error);
-            //     if (cm >= length - errorCount - 1) {
-            //       console.log("ended!");
-            //       res.json({ db: Lists });
-            //       res.end();
-            //     }
-            //     return false;
-            //   }
-            //   try {
-            //     await compare(img1, img2, options, function (err, data) {
-            //       if (err) {
-            //         console.log("An error!");
-            //       }
-            //       if (data.misMatchPercentage < 10) {
-            //         Lists.push(element);
-            //         matchNm++;
-            //       }
-            //       cm++;
-            //       if (cm === length - errorCount - 1) {
-            //         console.log("ended!");
-            //         res.json({ db: Lists });
-            //         res.end();
-            //       }
-            //       console.log(
-            //         `Counting Nm / totla Count : ${cm} / ${
-            //           length - errorCount - 1
-            //         } (matching Number : ${matchNm})`
-            //       );
-            //     });
-            //   } catch (error) {
-            //     if (cm === length - errorCount - 1) {
-            //       console.log("ended!");
-            //       res.json({ db: Lists });
-            //       res.end();
-            //     }
-            //     console.log(error);
-            //   }
-            // });
+            res.end();
 
-            _context.next = 13;
-            break;
-
-          case 9:
-            _context.prev = 9;
-            _context.t0 = _context["catch"](1);
-            console.log(_context.t0);
-            res.redirect(_routes["default"].home);
-
-          case 13:
+          case 6:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 9]]);
+    }, _callee);
   }));
 
   return function postSearchDB(_x, _x2) {
     return _ref.apply(this, arguments);
   };
-}(); //update DB API
+}(); //   const length = searchedDB.length;
+//   searchedDB.forEach(async (element) => {
+//     try {
+//       const img2 = element.imageURL;
+//       await compare(img1, img2, options, function (err, data) {
+//         if (data.misMatchPercentage < 10) {
+//           Lists.push(element);
+//           matchNm++;
+//         }
+//         cm++;
+//         console.log(
+//           `Counting Nm / total Count : ${cm} / ${
+//             length - errorCount - 1
+//           } (matching Number : ${matchNm})`
+//         );
+//       });
+//       if (cm === length - errorCount - 1) {
+//         res.json({ db: Lists });
+//         res.end();
+//       }
+//     } catch (error) {
+//       console.log(error);
+//       errorCount++;
+//       if (cm === length - errorCount - 1) {
+//         res.json({ db: Lists });
+//         res.end();
+//       }
+//     }
+//   });
+// };
+// try {
+//   // res.json({ db: searchedDB });
+//   // res.end();
+//   // const length = searchedDB.length;
+//   // searchedDB.forEach(async (element) => {
+//   //   try {
+//   //     img2 = await imageDataURI
+//   //       .encodeFromURL(element.imageURL)
+//   //       .then((res) => {
+//   //         return res;
+//   //       });
+//   //   } catch (error) {
+//   //     errorCount++;
+//   //     console.log(error);
+//   //     if (cm >= length - errorCount - 1) {
+//   //       console.log("ended!");
+//   //       res.json({ db: Lists });
+//   //       res.end();
+//   //     }
+//   //     return false;
+//   //   }
+//   //   try {
+//   //     await compare(img1, img2, options, function (err, data) {
+//   //       if (err) {
+//   //         console.log("An error!");
+//   //       }
+//   //       if (data.misMatchPercentage < 10) {
+//   //         Lists.push(element);
+//   //         matchNm++;
+//   //       }
+//   //       cm++;
+//   //       if (cm === length - errorCount - 1) {
+//   //         console.log("ended!");
+//   //         res.json({ db: Lists });
+//   //         res.end();
+//   //       }
+//   //       console.log(
+//   //         `Counting Nm / totla Count : ${cm} / ${
+//   //           length - errorCount - 1
+//   //         } (matching Number : ${matchNm})`
+//   //       );
+//   //     });
+//   //   } catch (error) {
+//   //     if (cm === length - errorCount - 1) {
+//   //       console.log("ended!");
+//   //       res.json({ db: Lists });
+//   //       res.end();
+//   //     }
+//   //     console.log(error);
+//   //   }
+//   // });
+// } catch (error) {
+//   console.log(error);
+//   res.redirect(routes.home);
+// }
+//update DB API
 
 
 exports.postSearchDB = postSearchDB;
@@ -192,7 +223,7 @@ var postUpdateDB = /*#__PURE__*/function () {
         switch (_context6.prev = _context6.next) {
           case 0:
             console.log("Updating...");
-            a = 1126;
+            a = 331;
 
           case 2:
             if (!(a <= 1165)) {
@@ -208,7 +239,7 @@ var postUpdateDB = /*#__PURE__*/function () {
             console.log("until ".concat(a + 4, ", done!"));
             db.forEach( /*#__PURE__*/function () {
               var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(element) {
-                var findSameData, newDB;
+                var findSameData, imgUri, newDB;
                 return regeneratorRuntime.wrap(function _callee3$(_context3) {
                   while (1) {
                     switch (_context3.prev = _context3.next) {
@@ -231,30 +262,37 @@ var postUpdateDB = /*#__PURE__*/function () {
                       case 7:
                         _context3.prev = 7;
                         _context3.next = 10;
+                        return _imageDataUri["default"].encodeFromURL(element.imageURL).then(function (res) {
+                          return res;
+                        });
+
+                      case 10:
+                        imgUri = _context3.sent;
+                        _context3.next = 13;
                         return _Bobae["default"].create({
                           siteName: element.siteName,
                           title: element.title,
                           pageURL: element.pageURL,
-                          imageURL: element.imageURL,
+                          imageURL: imgUri,
                           price: element.price
                         });
 
-                      case 10:
+                      case 13:
                         newDB = _context3.sent;
-                        _context3.next = 16;
+                        _context3.next = 19;
                         break;
 
-                      case 13:
-                        _context3.prev = 13;
+                      case 16:
+                        _context3.prev = 16;
                         _context3.t0 = _context3["catch"](7);
                         console.log(_context3.t0);
 
-                      case 16:
+                      case 19:
                       case "end":
                         return _context3.stop();
                     }
                   }
-                }, _callee3, null, [[7, 13]]);
+                }, _callee3, null, [[7, 16]]);
               }));
 
               return function (_x7) {
@@ -435,3 +473,99 @@ var postUpdateDB = /*#__PURE__*/function () {
 }();
 
 exports.postUpdateDB = postUpdateDB;
+
+var matchImage = /*#__PURE__*/function () {
+  var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(img1, searchedDB) {
+    return regeneratorRuntime.wrap(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            return _context8.abrupt("return", new Promise(function (resolve, reject) {
+              var errorCount = 0;
+              var cm = 0;
+              var matchNm = 0;
+              var lm = 0;
+              var Lists = [];
+              var options = {
+                scaleToSameSize: false,
+                ignore: ["antialiasing", "colors"]
+              };
+              var length = searchedDB.length;
+              searchedDB.forEach( /*#__PURE__*/function () {
+                var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(element) {
+                  return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                    while (1) {
+                      switch (_context7.prev = _context7.next) {
+                        case 0:
+                          lm++;
+                          _context7.prev = 1;
+                          _context7.t0 = compare;
+                          _context7.t1 = img1;
+                          _context7.next = 6;
+                          return base64Img.requestBase64(element.imageURL, function (err, res, body) {
+                            return body;
+                          });
+
+                        case 6:
+                          _context7.t2 = _context7.sent;
+                          _context7.t3 = options;
+
+                          _context7.t4 = function (err, data) {
+                            if (data.misMatchPercentage < 10) {
+                              Lists.push(element);
+                              matchNm++;
+                            }
+
+                            cm++;
+                            console.log("Counting Nm / totla Count : ".concat(cm, " / ").concat(length - errorCount - 1, " (matching Number : ").concat(matchNm, ")"));
+                          };
+
+                          _context7.next = 11;
+                          return (0, _context7.t0)(_context7.t1, _context7.t2, _context7.t3, _context7.t4);
+
+                        case 11:
+                          _context7.next = 17;
+                          break;
+
+                        case 13:
+                          _context7.prev = 13;
+                          _context7.t5 = _context7["catch"](1);
+                          errorCount++;
+                          console.log(_context7.t5);
+
+                        case 17:
+                          console.log("lm : ", lm);
+
+                        case 18:
+                        case "end":
+                          return _context7.stop();
+                      }
+                    }
+                  }, _callee7, null, [[1, 13]]);
+                }));
+
+                return function (_x12) {
+                  return _ref8.apply(this, arguments);
+                };
+              }());
+              resolve(Lists);
+            }));
+
+          case 1:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8);
+  }));
+
+  return function matchImage(_x10, _x11) {
+    return _ref7.apply(this, arguments);
+  };
+}(); // (img2 = base64Img.requestBase64(element.imageURL, function (
+//   err,
+//   res,
+//   body
+// ) {
+//   return body;
+// }))

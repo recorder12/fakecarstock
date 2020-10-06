@@ -165,48 +165,82 @@ export const postUpdateCommmand = async (req, res) => {
 export const postUpdateDB = async (req, res) => {
   console.log("Updating...");
 
-  for (let a = 331; a <= 1165; a += 5) {
-    const db = await updateCyber(a);
-    console.log(`until ${a + 4}, done!`);
+  // for (let a = 926; a <= 1155; a += 5) {
+  //   const db = await updateCyber(a);
+  //   console.log(`until ${a + 4}, done!`);
 
-    db.forEach(async (element) => {
-      const findSameData = await Bobae.findOne({ pageURL: element.pageURL });
+  //   db.forEach(async (element) => {
+  //     const findSameData = await Bobae.findOne({ pageURL: element.pageURL });
+  //     let imgUri;
+  //     if (findSameData) {
+  //       return;
+  //     } else {
+  //       try {
+  //         let errorCm = 0;
+  //         while (7) {
+  //           try {
+  //             imgUri = await imageDataURI
+  //               .encodeFromURL(element.imageURL)
+  //               .then((res) => {
+  //                 return res;
+  //               });
+  //             break;
+  //           } catch (error) {
+  //             console.log(error);
+  //             console.log("retry!");
+  //             errorCm++;
+  //             if (errorCm >= 3) {
+  //               break;
+  //             }
+  //             return;
+  //           }
+  //         }
 
-      if (findSameData) {
-        return;
-      } else {
-        try {
-          const imgUri = await imageDataURI
-            .encodeFromURL(element.imageURL)
-            .then((res) => {
-              return res;
-            });
+  //         const newDB = await Bobae.create({
+  //           siteName: element.siteName,
+  //           title: element.title,
+  //           pageURL: element.pageURL,
+  //           imageURL: imgUri,
+  //           price: element.price,
+  //         });
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //   });
+  // }
 
-          const newDB = await Bobae.create({
-            siteName: element.siteName,
-            title: element.title,
-            pageURL: element.pageURL,
-            imageURL: imgUri,
-            price: element.price,
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    });
-  }
-
-  for (let a = 1; a <= 60; a += 5) {
+  for (let a = 1; a <= 55; a += 5) {
     const db = await updateKorea(a);
     console.log(`until ${a + 4}, done!`);
 
     db.forEach(async (element) => {
       const findSameData = await Bobae.findOne({ pageURL: element.pageURL });
-
+      let imgUri;
       if (findSameData) {
         return;
       } else {
         try {
+          let errorCm = 0;
+          while (7) {
+            try {
+              imgUri = await imageDataURI
+                .encodeFromURL(element.imageURL)
+                .then((res) => {
+                  return res;
+                });
+              break;
+            } catch (error) {
+              console.log(error);
+              console.log("retry!");
+              errorCm++;
+              if (errorCm >= 3) {
+                break;
+              }
+              return;
+            }
+          }
+
           const newDB = await Bobae.create({
             siteName: element.siteName,
             title: element.title,
@@ -221,17 +255,36 @@ export const postUpdateDB = async (req, res) => {
     });
   }
 
-  for (let a = 1; a <= 60; a += 5) {
+  for (let a = 1; a <= 65; a += 5) {
     const db = await updateIncome(a);
     console.log(`until ${a + 4}, done!`);
 
     db.forEach(async (element) => {
       const findSameData = await Bobae.findOne({ pageURL: element.pageURL });
-
+      let imgUri;
       if (findSameData) {
         return;
       } else {
         try {
+          let errorCm = 0;
+          while (7) {
+            try {
+              imgUri = await imageDataURI
+                .encodeFromURL(element.imageURL)
+                .then((res) => {
+                  return res;
+                });
+              break;
+            } catch (error) {
+              console.log(error);
+              console.log("retry!");
+              errorCm++;
+              if (errorCm >= 3) {
+                break;
+              }
+              return;
+            }
+          }
           const newDB = await Bobae.create({
             siteName: element.siteName,
             title: element.title,

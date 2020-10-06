@@ -54,6 +54,7 @@ const matchImage = async (img1, searchedDB) => {
     // let matchNm = 0;
     let lm = 0;
     let Lists = [];
+    let confirmUri = 0;
 
     const options = {
       scaleToSameSize: false,
@@ -63,6 +64,16 @@ const matchImage = async (img1, searchedDB) => {
     const length = searchedDB.length;
 
     searchedDB.forEach(async (element) => {
+      confirmUri = element.imageURL.indexOf("data:image");
+      if (confirmUri === -1) {
+        console.log("image Uri is null or URL");
+        lm++;
+        if (lm === length - 1) {
+          resolve(Lists);
+        }
+        return;
+      }
+
       try {
         await compare(img1, element.imageURL, options, function (err, data) {
           if (data.misMatchPercentage < 10) {

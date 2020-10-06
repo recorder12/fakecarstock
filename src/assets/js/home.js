@@ -66,7 +66,6 @@ const matchImage = async (img1, searchedDB) => {
     searchedDB.forEach(async (element) => {
       confirmUri = element.imageURL.indexOf("data:image");
       if (confirmUri === -1) {
-        console.log("image Uri is null or URL");
         lm++;
         if (lm === length - 1) {
           resolve(Lists);

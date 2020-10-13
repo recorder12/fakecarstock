@@ -1,2 +1,3 @@
-User-agent: * Allow:/
-Sitemap: www.fakecarstock.com/sitempa.xml
+User-agent: * 
+Allow:/
+Sitemap: www.fakecarstock.com/sitemap.xml

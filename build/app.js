@@ -38,7 +38,7 @@ app.use( //csp policy set up
   directives: {
     defaultSrc: ["*", "https://fakecarstock.herokuapp.com/", "http://localhost:4000/", "https://file2.bobaedream.co.kr/"],
     scriptSrc: ["*", "'self'", "'unsafe-inline'", "'unsafe-eval'"],
-    styleSrc: ["*"],
+    styleSrc: ["*", "self", "'unsafe-inline", "'unsafe-eval'"],
     imgSrc: ["*", "'self'", "data: http:"],
     connectSrc: ["*", "'self'"],
     objectSrc: ["'none'"],

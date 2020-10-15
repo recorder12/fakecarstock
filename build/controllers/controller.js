@@ -52,8 +52,7 @@ exports.admin = admin;
 
 var postSearchDB = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
-    var _req$body, carModel, img1, searchedDB;
-
+    var carModel, searchedDB;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -67,7 +66,7 @@ var postSearchDB = /*#__PURE__*/function () {
             //   scaleToSameSize: false,
             //   ignore: ["antialiasing", "colors"],
             // };
-            _req$body = req.body, carModel = _req$body.carModel, img1 = _req$body.img1;
+            carModel = req.body.carModel;
             _context.next = 3;
             return _Bobae["default"].find({
               title: {

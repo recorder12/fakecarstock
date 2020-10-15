@@ -36,7 +36,7 @@ export const postSearchDB = async (req, res) => {
   // };
 
   const {
-    body: { carModel, img1 },
+    body: { carModel},
   } = req;
 
   const searchedDB = await Bobae.find({

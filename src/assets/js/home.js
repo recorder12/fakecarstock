@@ -14,11 +14,18 @@ const app = async () => {
     document.getElementById("lists").remove();
   }
 
+  
   if (img1.indexOf("data:image") === -1) {
     alert("차량 이미지를 업로드해주세요");
     init();
     return;
+  }else if(img1.length * 0.75 > 210000){
+    alert("이미지 크기가 너무 큽니다. (200 KB 이하)");
+    init();
+    return;
   }
+  
+
 
   if (!carModel || carModel === "" || carModel === " " || carModel === "  ") {
     alert("차량 모델명을 입력해주세요");
@@ -33,7 +40,6 @@ const app = async () => {
     method: "POST",
     data: {
       carModel,
-      img1,
     },
   });
 
@@ -52,13 +58,14 @@ const matchImage = async (img1, searchedDB) => {
     // let errorCount = 0;
     // let cm = 0;
     // let matchNm = 0;
+    
+    let confirmUri = 0;
     let lm = 0;
     let Lists = [];
-    let confirmUri = 0;
 
     const options = {
       scaleToSameSize: false,
-      ignore: ["antialiasing", "colors"],
+      ignore: ["antialiasing", "colors"],largeImageThreshold: 1200,returnEarlyThreshold: 5
     };
 
     const length = searchedDB.length;
@@ -78,12 +85,12 @@ const matchImage = async (img1, searchedDB) => {
             // matchNm++;
           }
 
-          //   cm++;
-          //   console.log(
-          //     `Counting Nm / total Count : ${cm} / ${
-          //       length - errorCount
-          //     } (matching Number : ${matchNm})`
-          //   );
+            // cm++;
+            // console.log(
+            //   `Counting Nm / total Count : ${cm} / ${
+            //     length - errorCount
+            //   } (matching Number : ${matchNm})`
+            // );
         });
       } catch (error) {
         console.log(error);

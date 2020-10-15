@@ -24,9 +24,11 @@ app.use(
         "https://fakecarstock.herokuapp.com/",
         "http://localhost:4000/",
         "https://file2.bobaedream.co.kr/",
+        "http://fakecarstock.com",
+        "http://www.fakecarstock.com"
       ],
       scriptSrc: ["*", "'self'", "'unsafe-inline'", "'unsafe-eval'"],
-      styleSrc: ["*", "self", "'unsafe-inline", "'unsafe-eval'"],
+      styleSrc: ["*", "'self'", "'unsafe-inline'", "'unsafe-eval'"],
       imgSrc: ["*", "'self'", "data: http:"],
       connectSrc: ["*", "'self'"],
       objectSrc: ["'none'"],

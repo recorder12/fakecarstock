@@ -19,7 +19,7 @@ const app = async () => {
     alert("차량 이미지를 업로드해주세요");
     init();
     return;
-  }else if(img1.length * 0.75 > 210000){
+  }else if(img1.length * 0.75 > 310000){
     alert("이미지 크기가 너무 큽니다. (200 KB 이하)");
     init();
     return;

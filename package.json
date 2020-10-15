@@ -2,6 +2,9 @@
   "name": "fakecarstock",
   "version": "1.0.0",
   "description": "Matching uploaded image by many images of car stocks on popular sites to prevent people from tricking",
+  "engines": {
+    "node": "14.8.0"
+  },
   "main": "index.js",
   "repository": {
     "type": "git",

@@ -7,7 +7,7 @@ dotenv.config();
 
 import "./models/Bobae";
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 
 const handelListening = () =>
   console.log(`✅ Listening on : http://localhost:${PORT}`);

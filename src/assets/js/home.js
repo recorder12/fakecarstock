@@ -20,7 +20,7 @@ const app = async () => {
     init();
     return;
   }else if(img1.length * 0.75 > 310000){
-    alert("이미지 크기가 너무 큽니다. (200 KB 이하)");
+    alert("이미지 크기가 너무 큽니다. (300 KB 이하)");
     init();
     return;
   }

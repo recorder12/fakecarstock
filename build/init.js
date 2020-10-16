@@ -14,7 +14,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 _dotenv["default"].config();
 
-var PORT = process.env.PORT || 4000;
+var PORT = process.env.PORT || 8080;
 
 var handelListening = function handelListening() {
   return console.log("\u2705 Listening on : http://localhost:".concat(PORT));

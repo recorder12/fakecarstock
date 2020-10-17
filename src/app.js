@@ -33,7 +33,7 @@ app.use(
       connectSrc: ["*", "'self'"],
       objectSrc: ["'none'"],
       mediaSrc: ["'self'"],
-      frameSrc: ["'none'"],
+      frameSrc: ["*"],
     },
     reportOnly: false,
   })

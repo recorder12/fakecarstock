@@ -43,7 +43,7 @@ app.use( //csp policy set up
     connectSrc: ["*", "'self'"],
     objectSrc: ["'none'"],
     mediaSrc: ["'self'"],
-    frameSrc: ["'none'"]
+    frameSrc: ["*"]
   },
   reportOnly: false
 })); // var whitelist = [

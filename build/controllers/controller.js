@@ -225,7 +225,7 @@ var postUpdateDB = /*#__PURE__*/function () {
             a = 1;
 
           case 2:
-            if (!(a <= 100)) {
+            if (!(a <= 400)) {
               _context6.next = 11;
               break;
             }

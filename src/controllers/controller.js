@@ -165,7 +165,7 @@ export const postUpdateCommmand = async (req, res) => {
 export const postUpdateDB = async (req, res) => {
   console.log("Updating...");
 
-  for (let a = 1; a <= 100; a += 5) {
+  for (let a = 300; a <= 1000; a += 5) {
     const db = await updateCyber(a);
     console.log(`until ${a + 4}, done!`);
 

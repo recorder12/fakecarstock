@@ -30,7 +30,7 @@ var updateCyber = /*#__PURE__*/function () {
             page = startPage;
 
           case 3:
-            if (!(page <= startPage + 4)) {
+            if (!(page <= startPage + 100)) {
               _context.next = 13;
               break;
             }
@@ -79,7 +79,7 @@ var updateKorea = /*#__PURE__*/function () {
             page = startPage;
 
           case 3:
-            if (!(page <= startPage + 4)) {
+            if (!(page <= startPage + 20)) {
               _context2.next = 13;
               break;
             }
@@ -128,7 +128,7 @@ var updateIncome = /*#__PURE__*/function () {
             page = startPage;
 
           case 3:
-            if (!(page <= startPage + 4)) {
+            if (!(page <= startPage + 20)) {
               _context3.next = 13;
               break;
             }

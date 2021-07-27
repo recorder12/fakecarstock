@@ -27,7 +27,7 @@ export const updateKorea = async (startPage) => {
 
   for (let page = startPage; page <= startPage + 4; page++) {
     let URL = `https://www.bobaedream.co.kr/mycar/mycar_list.php?gubun=K&page=${page}&order=S11&view_size=70`;
-
+   
     const updatedDB = await getDB(URL);
     db = db.concat(updatedDB);
     console.log(`Bobae DB Update : ${page}/${startPage + 4} updating...`);
